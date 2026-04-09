@@ -1,15 +1,7 @@
 #include <stdio.h>
 
-void mat_multiplier(int n, int m, int p, int A[n][m], int B[m][p], int C[n][p]) {
-    for (int i = 0; i<n; i++) {
-        for (int j=0; j<p; j++) {
-            C[i][j] = 0;
-            for (int k = 0; k<m; k++) {
-                C[i][j] += A[i][k] * B[k][j];
-            }
-        }
-    }
-}
+/* Use the implementation from multicore_proj.c (compiled with OpenMP). */
+void mat_multiplier(int n, int m, int p, int A[n][m], int B[m][p], int C[n][p]);
 
 int main() {
     int n = 2, m = 3, p = 2;

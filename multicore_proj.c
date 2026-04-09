@@ -12,3 +12,24 @@ void mat_multiplier(int n, int m, int p, int A[n][m], int B[m][p], int C[n][p]) 
         }
     }
 }
+
+int main() {
+    int n = 2, m = 3, p = 2;
+
+    int A[2][3] = {
+        {1, 2, 3},
+        {4, 5, 6}
+    };
+
+    int B[3][2] = {
+        {7, 8},
+        {9, 10},
+        {11, 12}
+    };
+
+    int C[2][2];
+
+    mat_multiplier(n, m, p, A, B, C);
+
+    return 0;
+}

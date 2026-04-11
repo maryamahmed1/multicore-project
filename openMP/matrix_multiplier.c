@@ -16,6 +16,16 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    // This will show how long it takes just to create a thread
+    // it will show the time it takes to startup, create threads, end
+    double simple_start = omp_get_wtime();
+    #pragma omp parallel
+    {}
+    double simple_end = omp_get_wtime();
+    double simple_total_time = 0;
+    simple_total_time = simple_end - simple_start;
+    printf("Time taken for simple thread creation = %f\n", simple_total_time);
+
     int num_threads = atoi(argv[1]);
 
     if (num_threads <= 0) {

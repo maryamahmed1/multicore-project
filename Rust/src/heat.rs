@@ -11,7 +11,7 @@ fn index(i: usize, j: usize, n: usize) -> usize {
 pub fn main() {
     let args: Vec<String> = env::args().collect();
 
-    if args.len() != 4 {
+    if args.len() != 5 {
         eprintln!("usage: {} num iterations threads", args[0]);
         eprintln!("num = dimension of the square matrix");
         eprintln!("iterations = number of iterations till stopping (1 and up)");
@@ -19,17 +19,17 @@ pub fn main() {
         process::exit(1);
     }
 
-    let n: usize = args[1].parse().unwrap_or_else(|_| {
+    let n: usize = args[2].parse().unwrap_or_else(|_| {
         eprintln!("Invalid num");
         process::exit(1);
     });
 
-    let iterations: usize = args[2].parse().unwrap_or_else(|_| {
+    let iterations: usize = args[3].parse().unwrap_or_else(|_| {
         eprintln!("Invalid iterations");
         process::exit(1);
     });
 
-    let num_threads: usize = args[3].parse().unwrap_or_else(|_| {
+    let num_threads: usize = args[4].parse().unwrap_or_else(|_| {
         eprintln!("Invalid threads");
         process::exit(1);
     });

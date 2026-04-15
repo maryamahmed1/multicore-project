@@ -1,4 +1,3 @@
-use rayon::ThreadPool;
 use rayon::ThreadPoolBuilder;
 use rayon::prelude::*;
 use std::env;

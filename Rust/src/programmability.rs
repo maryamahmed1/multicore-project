@@ -1,4 +1,3 @@
-use rayon::ThreadBuilder;
 use rayon::ThreadPoolBuilder;
 use rayon::prelude::*;
 use std::sync::{Arc, Mutex};

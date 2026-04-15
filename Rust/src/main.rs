@@ -8,12 +8,9 @@ use matrix_multiplier::main as mat_mul_main;
 use programmability::{BenchmarkCase, BenchmarkParams, ImplKind};
 // use racecondition::main as rc_main;
 
-use programmability::run_programmability_benchmark;
-use rayon;
-
 fn main() {
     println!("max threads  =  {}", rayon::current_num_threads());
-    let params = BenchmarkParams {
+    let _params = BenchmarkParams {
         case: BenchmarkCase::Histogram,
         implementation: ImplKind::RayonLocal,
         n: 10000,
@@ -26,10 +23,10 @@ fn main() {
         num_threads: 8,
     };
     // For mat mult
-    // mat_mul_main();
+    mat_mul_main();
 
     // For heat
-    heat_main();
+    // heat_main();
 
     // For race condition example
     // rc_main();

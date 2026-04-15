@@ -11,7 +11,7 @@ fn index(i: usize, j: usize, n: usize) -> usize {
 pub fn main() {
     let args: Vec<String> = env::args().collect();
 
-    if args.len() != 5 {
+    if args.len() != 4 {
         eprintln!("usage: {} num iterations threads", args[0]);
         eprintln!("num = dimension of the square matrix");
         eprintln!("iterations = number of iterations till stopping (1 and up)");
@@ -19,17 +19,17 @@ pub fn main() {
         process::exit(1);
     }
 
-    let n: usize = args[2].parse().unwrap_or_else(|_| {
+    let n: usize = args[1].parse().unwrap_or_else(|_| {
         eprintln!("Invalid num");
         process::exit(1);
     });
 
-    let iterations: usize = args[3].parse().unwrap_or_else(|_| {
+    let iterations: usize = args[2].parse().unwrap_or_else(|_| {
         eprintln!("Invalid iterations");
         process::exit(1);
     });
 
-    let num_threads: usize = args[4].parse().unwrap_or_else(|_| {
+    let num_threads: usize = args[3].parse().unwrap_or_else(|_| {
         eprintln!("Invalid threads");
         process::exit(1);
     });
@@ -75,7 +75,7 @@ pub fn main() {
     });
     let time_taken = start.elapsed().as_secs_f64();
 
-    println!("Time taken = {}", time_taken);
+    println!("DATA:heat,Rust,{},{},{}", n, num_threads, time_taken);
 }
 
 fn parallel_heat_dist(playground: &mut [f32], n: usize, iterations: usize) {
@@ -84,7 +84,7 @@ fn parallel_heat_dist(playground: &mut [f32], n: usize, iterations: usize) {
     // calloc + memcpy equivalent
     let mut temp = playground.to_vec();
 
-    for _k in 0..iterations {
+    (0..iterations).for_each(|_| {
         // Update interior cells only
         temp.par_chunks_mut(n).enumerate().for_each(|(i, row)| {
             if i == 0 || i == upper {
@@ -102,5 +102,5 @@ fn parallel_heat_dist(playground: &mut [f32], n: usize, iterations: usize) {
 
         // memcpy(playground, temp, ...)
         playground.copy_from_slice(&temp);
-    }
+    });
 }

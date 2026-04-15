@@ -33,10 +33,9 @@ pub fn main() {
         rayon::scope(|_| {});
     });
     let simple_total_time = simple_start.elapsed().as_secs_f64();
-
     println!(
-        "Time taken for simple thread creation = {:.6}",
-        simple_total_time
+        "DATA:overhead,Rust,0,{},{:.6}",
+        num_threads, simple_total_time
     );
 
     benchmark(&pool, num_threads, 10);
@@ -76,8 +75,5 @@ fn benchmark(pool: &rayon::ThreadPool, num_threads: usize, n: usize) {
         mat_multiplier(n, n, &a, &b, &mut c);
     });
     let total_time = start.elapsed().as_secs_f64();
-    println!(
-        "Time taken for matrix size N = {} and threads = {} completed with time = {:.6}",
-        n, num_threads, total_time
-    );
+    println!("DATA:mat_mul,Rust,{},{},{:.6}", n, num_threads, total_time);
 }

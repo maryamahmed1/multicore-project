@@ -3,6 +3,7 @@ use rayon::prelude::*;
 use std::env;
 use std::process;
 use std::sync::{Arc, Mutex};
+use std::time::Instant;
 
 fn compute_histogram(page: &[u8], histogram: &mut [usize], num_buckets: usize, num_threads: usize) {
     let pool = ThreadPoolBuilder::new()
@@ -106,7 +107,13 @@ pub fn main() {
         "simple histogram version: omitted in Rust because the direct shared-mutation version is rejected by the compiler"
     );
 
+    let start = Instant::now();
     compute_histogram_mutex(&page, &mut simple_histogram, threads);
+    let mutex_time = start.elapsed().as_secs_f64();
+    println!(
+        "DATA:hist_mutex,Rust,{},{},{:.6}",
+        page_size, threads, mutex_time
+    );
     (0..num_buckets).for_each(|i| {
         if simple_histogram[i] > 0 {
             println!(
@@ -116,7 +123,13 @@ pub fn main() {
         }
     });
 
+    let start = Instant::now();
     compute_histogram(&page, &mut histogram, num_buckets, threads);
+    let local_time = start.elapsed().as_secs_f64();
+    println!(
+        "DATA:hist_local,Rust,{},{},{:.6}",
+        page_size, threads, local_time
+    );
     (0..num_buckets).for_each(|i| {
         if histogram[i] > 0 {
             println!("bucket {} has weight {}", i, histogram[i]);

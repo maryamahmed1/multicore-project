@@ -5,3 +5,4 @@ target
 **/*.rs.bk
 /.ipynb_checkpoints
 /openMP/bin
+/speedups.csv

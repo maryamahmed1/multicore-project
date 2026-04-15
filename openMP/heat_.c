@@ -8,7 +8,7 @@
 int numthreads = 0;
 #define index(i, j, N)  ((i)*(N)) + (j)
 
-void parallel_heat_dist(float *playground, unsigned int, unsigned int interations);
+void parallel_heat_dist(float *playground, unsigned int N, unsigned int interations);
 int main(int argc, char * argv[])
 {
   unsigned int N; /* Dimention of NxN matrix */

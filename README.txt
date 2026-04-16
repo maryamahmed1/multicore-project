@@ -119,8 +119,3 @@ Benchmark results are stored in CSV format with columns:
 - Time_Seconds: Execution time in seconds
 
 The analysis notebook provides visualizations comparing performance across languages and thread counts.
-
-Contributing
-------------
-
-This project is for educational purposes demonstrating multicore programming concepts and performance comparisons between OpenMP and Rust/Rayon.
